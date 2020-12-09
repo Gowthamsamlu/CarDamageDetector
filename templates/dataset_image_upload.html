@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Car Damage Detector - Update Dataset Images</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col-sm-2"></div>
+    <div class="formdiv col-sm-8">
+        <h2>Contribute to Update Dataset</h2>
+        <h4>Upload new damaged images and help us to update our dataset</h4>
+        <BR>
+        <form class="form-horizontal" action="/update_ds" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="col-sm-1"></div>
+            <label class="control-label col-sm-3" for="damage_file" style="margin-top:15pt;vertical-align:middle;font-size: 18pt;">Upload the damaged Image</label>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5"> 
+                <label for="damage_file"><img id="car_image" style="width:200px; height:200px; cursor:pointer" src="/static/assets/images/crash.png"></label>         
+                <input type="file" required accept="images/*" onchange="update_placeholder_image(this)" style="display: none;" class="form-control" id="damage_file" name="damage_file">
+            </div>
+        </div>
+        <div class="form-group">        
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="/" class="btn btn-default">Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script>
+    function update_placeholder_image( input ){
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#car_image')
+            .attr('src', e.target.result)
+            .width(300);
+        };
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Car Damage Detector</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col-sm-2"></div>
+    <div class="formdiv col-sm-8">
+        <h2>Damage Detector</h2>
+        <h4>Detected Image</h4>
+        <BR>
+        <div class="row">
+            <div class="col-sm-12"> 
+                <img id="car_image" style="height:250px; cursor:pointer" src="{{ url_for('static',filename = 'output_images/'+outfilepath) }}">
+                <BR><BR>
+                <a href="{{ url_for('static',filename = 'output_images/'+outfilepath) }}" class="btn btn-primary" download>Download Image</a>
+                <BR><BR><BR>
+            </div>
+        </div>
+        <div class="form-group">        
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="/" class="btn btn-warning">Try Another</a>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2">
+                    <a href="/update_ds" class="btn btn-default">Contribute Damaged Images</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script>
+    function update_placeholder_image( input ){
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#car_image')
+            .attr('src', e.target.result)
+            .width(300);
+        };
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}

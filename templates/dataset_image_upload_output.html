@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Car Damage Detector - Update Dataset Images</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="col-sm-2"></div>
+    <div class="formdiv col-sm-8">
+        <h2>Contribute to Update Dataset</h2>
+        <h4>Image submitted for manual verification. Thank you for your contribution</h4>
+        <BR>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2">
+                <a href="/" class="btn btn-default">Home</a>
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function update_placeholder_image( input ){
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#car_image')
+            .attr('src', e.target.result)
+            .width(300);
+        };
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}
